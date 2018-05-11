@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Amped Store</string>
+    <string name="store_item_title">Title</string>
+
+    <string name="dummy">dummy</string>
+    <string name="picture">picture</string>
+    <string name="details">Details</string>
+    <string name="currency_sign">$</string>
+    <string name="product_picture">product picture</string>
+    <string name="stub_price_value">12.50</string>
+    <string name="x">x</string>
+    <string name="checkout">Checkout</string>
+    <string name="order_in_time_request">Order in 30 minutes to get free shipping</string>
+    <string name="number_of_items">Number of items:</string>
+    <string name="subtotal_value_stub">12234,01</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="default_zero">0</string>
+    <string name="thanks_message">We\'ve received your order! Thank you! </string>
+    <string name="make_new_order">Make a new order</string>
+    <string name="place_order">Place order</string>
+    <string name="discount">Discount:</string>
+    <string name="total">Total:</string>
+    <string name="card_number">Card number:</string>
+    <string name="card_number_stub">xxx-xxx-xxx-312</string>
+    <string name="address">Address:</string>
+    <string name="address_stub">123 University Street, Palo Alto, CA</string>
+    <string name="delivery_date">Delivery date:</string>
+    <string name="date_stub">Monday, 10 May</string>
+    <string name="stub_count">5</string>
+    <string name="add">Add</string>
+    <string name="added">Added</string>
+    <string name="cart">CART</string>
+</resources>
