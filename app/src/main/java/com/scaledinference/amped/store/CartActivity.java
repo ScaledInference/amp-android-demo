@@ -16,7 +16,6 @@ import com.scaledinference.amped.store.model.UserSession;
 public class CartActivity extends AppCompatActivity implements OrderUpdateListener {
     public static final String PRICE_STRING_FORMAT = "%.2f";
 
-    private RecyclerView recyclerView;
     private Session session;
 
     @Override
@@ -28,13 +27,13 @@ public class CartActivity extends AppCompatActivity implements OrderUpdateListen
 
         setContentView(R.layout.cart_activity);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
 
-        RecyclerView.LayoutManager mLayoutManager =
+        RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(new CartAdapter(session.getOrder()));
 

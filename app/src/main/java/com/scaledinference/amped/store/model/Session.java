@@ -6,22 +6,22 @@ import java.util.Date;
 import java.util.Map;
 
 public class Session {
-    private Order mOrder = new Order();
-    private Date mStartDate = new Date();
-    private Integer mTheme = R.style.AppThemeOrange;
+    private Order order = new Order();
+    private Date startDate = new Date();
+    private Integer theme = R.style.AppThemeOrange;
     // Time given to place an order to get free shipping in minutes
     private int freeShippingTimeLimit = 30;
 
     public Order getOrder() {
-        return mOrder;
+        return order;
     }
 
     public int getTheme() {
-        return mTheme;
+        return theme;
     }
 
     public long getMinutesLeftForFreeShipping() {
-        long minutesPassed = (System.currentTimeMillis() - mStartDate.getTime())/(1000 * 60);
+        long minutesPassed = (System.currentTimeMillis() - startDate.getTime())/(1000 * 60);
         long minutesLeft = freeShippingTimeLimit - minutesPassed;
         return minutesLeft < 0 ? 0 : minutesLeft;
     }

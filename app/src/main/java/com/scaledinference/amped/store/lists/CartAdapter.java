@@ -45,39 +45,39 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemViewHolder
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mTitleTextView;
-        private ImageView mImageView;
-        private TextView mPriceTextView;
-        private TextView mCountTextView;
-        private Button mAddButton;
-        private Button mRemoveButton;
+        private TextView titleTextView;
+        private ImageView imageView;
+        private TextView priceTextView;
+        private TextView countTextView;
+        private Button addButton;
+        private Button removeButton;
 
         private CheckoutItem item;
 
         ItemViewHolder(View v) {
             super(v);
-            mTitleTextView = v.findViewById(R.id.title);
-            mImageView = v.findViewById(R.id.picture);
-            mPriceTextView = v.findViewById(R.id.price);
-            mCountTextView = v.findViewById(R.id.count);
-            mAddButton = v.findViewById(R.id.addButton);
-            mRemoveButton = v.findViewById(R.id.removeButton);
+            titleTextView = v.findViewById(R.id.title);
+            imageView = v.findViewById(R.id.picture);
+            priceTextView = v.findViewById(R.id.price);
+            countTextView = v.findViewById(R.id.count);
+            addButton = v.findViewById(R.id.addButton);
+            removeButton = v.findViewById(R.id.removeButton);
 
-            mAddButton.setOnClickListener(this);
-            mRemoveButton.setOnClickListener(this);
+            addButton.setOnClickListener(this);
+            removeButton.setOnClickListener(this);
         }
 
         void bind(CheckoutItem item) {
             this.item = item;
-            mTitleTextView.setText(item.getProduct().getName());
+            titleTextView.setText(item.getProduct().getName());
 
-            Context context = mImageView.getContext();
+            Context context = imageView.getContext();
             int resourceId = context.getResources().getIdentifier(
                     "drawable/ic_" + item.getProduct().getId(), null,
                     context.getPackageName());
-            mImageView.setImageResource(resourceId);
-            mPriceTextView.setText(String.format(PRICE_STRING_FORMAT, item.getProduct().getPrice()));
-            mCountTextView.setText(String.valueOf(item.getCount()));
+            imageView.setImageResource(resourceId);
+            priceTextView.setText(String.format(PRICE_STRING_FORMAT, item.getProduct().getPrice()));
+            countTextView.setText(String.valueOf(item.getCount()));
         }
 
         @Override
