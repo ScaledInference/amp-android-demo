@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.scaledinference.amped.store.lists.CheckoutAdapter;
-import com.scaledinference.amped.store.model.Session;
+import com.scaledinference.amped.store.model.CheckoutSession;
 import com.scaledinference.amped.store.model.UserSession;
 
 import java.text.DateFormat;
@@ -21,14 +21,14 @@ import java.util.Map;
 import static com.scaledinference.amped.store.CartActivity.PRICE_STRING_FORMAT;
 
 public class CheckoutActivity extends AppCompatActivity {
-    private Session session;
+    private CheckoutSession checkoutSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        session = UserSession.getInstance().getSession();
-        setTheme(session.getTheme());
+        checkoutSession = UserSession.getInstance().getCheckoutSession();
+        setTheme(checkoutSession.getTheme());
 
         setContentView(R.layout.checkout_activity);
 
@@ -39,7 +39,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        recyclerView.setAdapter(new CheckoutAdapter(session.getOrder()));
+        recyclerView.setAdapter(new CheckoutAdapter(checkoutSession.getOrder()));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -50,21 +50,21 @@ public class CheckoutActivity extends AppCompatActivity {
         // Subtotal
         TextView subtotalTextView = findViewById(R.id.subtotalTextView);
         subtotalTextView.setText(
-                String.format(PRICE_STRING_FORMAT, session.getOrder().getSubtotalCost()));
+                String.format(PRICE_STRING_FORMAT, checkoutSession.getOrder().getSubtotalCost()));
 
         // Discount
         TextView discountTextView = findViewById(R.id.discountTextView);
         discountTextView.setText(
-                String.format(PRICE_STRING_FORMAT, session.getOrder().getDiscountAmount()));
+                String.format(PRICE_STRING_FORMAT, checkoutSession.getOrder().getDiscountAmount()));
 
         // Total
         TextView totalTextView = findViewById(R.id.totalTextView);
         totalTextView.setText(
-                String.format(PRICE_STRING_FORMAT, session.getOrder().getSubtotalCost()));
+                String.format(PRICE_STRING_FORMAT, checkoutSession.getOrder().getSubtotalCost()));
 
         // Delivery
         TextView deliveryDateTextView = findViewById(R.id.deliveryDateTextView);
-        deliveryDateTextView.setText(String.valueOf(session.getOrder().getTotalCount()));
+        deliveryDateTextView.setText(String.valueOf(checkoutSession.getOrder().getTotalCount()));
 
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
         String deliveryDateString = dateFormat.format(new Date());
@@ -73,10 +73,10 @@ public class CheckoutActivity extends AppCompatActivity {
 
     public void placeOrder(View view) {
         Map<String, Object> properties = new HashMap<>();
-        properties.put("totalCost", session.getOrder().getTotalCost());
-        properties.put("count", session.getOrder().getTotalCount());
+        properties.put("totalCost", checkoutSession.getOrder().getTotalCost());
+        properties.put("count", checkoutSession.getOrder().getTotalCount());
 
-        session.reportEvent("Checkout event", properties);
+        checkoutSession.reportEvent("Checkout event", properties);
 
         startActivity(new Intent(this, ThanksActivity.class));
     }

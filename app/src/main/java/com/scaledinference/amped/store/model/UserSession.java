@@ -3,17 +3,17 @@ package com.scaledinference.amped.store.model;
 public class UserSession {
     private static final UserSession INSTANCE = new UserSession();
 
-    private Session session;
+    private CheckoutSession checkoutSession;
 
-    public Session getSession() {
-        if (session == null) {
-            session = new Session();
+    public CheckoutSession getCheckoutSession() {
+        if (checkoutSession == null) {
+            checkoutSession = new CheckoutSession();
         }
-        return session;
+        return checkoutSession;
     }
 
     public void endSession() {
-        session = null;
+        checkoutSession = null;
     }
 
     public static UserSession getInstance(){

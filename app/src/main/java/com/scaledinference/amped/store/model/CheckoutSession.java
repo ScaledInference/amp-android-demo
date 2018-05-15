@@ -5,7 +5,7 @@ import com.scaledinference.amped.store.R;
 import java.util.Date;
 import java.util.Map;
 
-public class Session {
+public class CheckoutSession {
     private Order order = new Order();
     private Date startDate = new Date();
     private Integer theme = R.style.AppThemeOrange;

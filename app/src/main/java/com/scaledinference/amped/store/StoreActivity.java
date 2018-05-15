@@ -10,19 +10,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.scaledinference.amped.store.lists.StoreAdapter;
-import com.scaledinference.amped.store.model.Session;
+import com.scaledinference.amped.store.model.CheckoutSession;
 import com.scaledinference.amped.store.model.UserSession;
 
 public class StoreActivity extends AppCompatActivity implements OrderUpdateListener {
     private RecyclerView recyclerView;
-    private Session session;
+    private CheckoutSession checkoutSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        session = UserSession.getInstance().getSession();
-        setTheme(session.getTheme());
+        checkoutSession = UserSession.getInstance().getCheckoutSession();
+        setTheme(checkoutSession.getTheme());
 
         setContentView(R.layout.store_activity);
 
@@ -33,13 +33,13 @@ public class StoreActivity extends AppCompatActivity implements OrderUpdateListe
         recyclerView.setLayoutManager(mLayoutManager);
 
         recyclerView.setAdapter(
-                new StoreAdapter(DataProvider.getCompositeItems(this), session.getOrder()));
+                new StoreAdapter(DataProvider.getCompositeItems(this), checkoutSession.getOrder()));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        session.getOrder().addListener(this);
+        checkoutSession.getOrder().addListener(this);
         recyclerView.getAdapter().notifyDataSetChanged();
         invalidateOptionsMenu();
     }
@@ -47,7 +47,7 @@ public class StoreActivity extends AppCompatActivity implements OrderUpdateListe
     @Override
     protected void onStop() {
         super.onStop();
-        session.getOrder().removeListener(this);
+        checkoutSession.getOrder().removeListener(this);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class StoreActivity extends AppCompatActivity implements OrderUpdateListe
         MenuInflater findMenuItems = getMenuInflater();
         findMenuItems.inflate(R.menu.store_menu, menu);
         MenuItem cartMenuItem = menu.findItem(R.id.action_cart);
-        String title = getString(R.string.cart)+ " - " + session.getOrder().getTotalCount();
+        String title = getString(R.string.cart)+ " - " + checkoutSession.getOrder().getTotalCount();
         cartMenuItem.setTitle(title);
         return super.onCreateOptionsMenu(menu);
     }

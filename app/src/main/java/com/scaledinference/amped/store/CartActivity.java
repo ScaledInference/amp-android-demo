@@ -10,20 +10,20 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.scaledinference.amped.store.lists.CartAdapter;
-import com.scaledinference.amped.store.model.Session;
+import com.scaledinference.amped.store.model.CheckoutSession;
 import com.scaledinference.amped.store.model.UserSession;
 
 public class CartActivity extends AppCompatActivity implements OrderUpdateListener {
     public static final String PRICE_STRING_FORMAT = "%.2f";
 
-    private Session session;
+    private CheckoutSession checkoutSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        session = UserSession.getInstance().getSession();
-        setTheme(session.getTheme());
+        checkoutSession = UserSession.getInstance().getCheckoutSession();
+        setTheme(checkoutSession.getTheme());
 
         setContentView(R.layout.cart_activity);
 
@@ -35,7 +35,7 @@ public class CartActivity extends AppCompatActivity implements OrderUpdateListen
                 new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(new CartAdapter(session.getOrder()));
+        recyclerView.setAdapter(new CartAdapter(checkoutSession.getOrder()));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -46,29 +46,29 @@ public class CartActivity extends AppCompatActivity implements OrderUpdateListen
     protected void onStart() {
         super.onStart();
 
-        session.getOrder().addListener(this);
+        checkoutSession.getOrder().addListener(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        session.getOrder().removeListener(this);
+        checkoutSession.getOrder().removeListener(this);
     }
 
     void updateOrderInformation() {
         // Counter
         TextView countTextView = findViewById(R.id.countTextView);
-        countTextView.setText(String.valueOf(session.getOrder().getTotalCount()));
+        countTextView.setText(String.valueOf(checkoutSession.getOrder().getTotalCount()));
 
         // Subtotal
         TextView subtotalTextView = findViewById(R.id.subtotalTextView);
         subtotalTextView.setText(
-                String.format(PRICE_STRING_FORMAT, session.getOrder().getSubtotalCost()));
+                String.format(PRICE_STRING_FORMAT, checkoutSession.getOrder().getSubtotalCost()));
 
         // Free shipping time limit
         TextView freeShippingTextView = findViewById(R.id.freeShippingTextView);
-        long minutesLeftForFreeShipping = session.getMinutesLeftForFreeShipping();
+        long minutesLeftForFreeShipping = checkoutSession.getMinutesLeftForFreeShipping();
         if (minutesLeftForFreeShipping == 0) {
             freeShippingTextView.setVisibility(View.GONE);
         } else {

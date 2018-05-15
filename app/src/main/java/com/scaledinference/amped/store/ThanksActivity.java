@@ -12,7 +12,7 @@ public class ThanksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(UserSession.getInstance().getSession().getTheme());
+        setTheme(UserSession.getInstance().getCheckoutSession().getTheme());
         setContentView(R.layout.thanks_activity);
     }
 
