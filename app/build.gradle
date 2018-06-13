@@ -24,4 +24,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'com.github.ScaledInference:amp-android:1.0.7'
 }
